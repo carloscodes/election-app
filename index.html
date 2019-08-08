@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="main.js" defer></script>
+    <script src="https://apis.google.com/js/client.js?"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+      integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu"
+      crossorigin="anonymous"
+    />
+    <!-- Latest compiled and minified JavaScript -->
+    <script
+      defer
+      src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+      integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <style>
+    #address {
+      width: 50%;
+      font-weight: bold;
+    }
+  </style>
+
+  <body>
+    <div class="container">
+      <br />
+      <p>Enter your address:</p>
+      <input placeholder="Address" type="text" id="address" />
+      <input id="vals" type="submit" onclick="takeAddress();" />
+      <ul id="results"></ul>
+      <br />
+      <div id="contests"></div>
+    </div>
+  </body>
+</html>
