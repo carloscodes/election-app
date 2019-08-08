@@ -17,20 +17,39 @@
       integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
       crossorigin="anonymous"
     ></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <style>
     #address {
       width: 50%;
-      font-weight: bold;
+      height: 30px;
+    }
+
+    .centerInput {
+      text-align: center;
     }
   </style>
 
   <body>
     <div class="container">
       <br />
-      <p>Enter your address:</p>
-      <input placeholder="Address" type="text" id="address" />
-      <input id="vals" type="submit" onclick="takeAddress();" />
+      <div class="centerInput">
+        <p>Enter your address:</p>
+        <input placeholder=" Address" type="text" id="address" />
+        <button
+          id="vals"
+          type="button"
+          class="btn btn-primary"
+          onclick="takeAddress();"
+        >
+          Submit
+        </button>
+      </div>
       <ul id="results"></ul>
       <br />
       <div id="contests"></div>

@@ -39,23 +39,42 @@ function renderResults(response) {
   try {
     const lenLocationPolls = response.pollingLocations.length;
     const lenContests = response.contests.length;
+    // console.log(lenContests);
+    console.log(response.contests);
+
+    let j = 0;
+    let arrlength = response.contests[j].candidates.length;
 
     if (lenContests > 0) {
       let c = document.getElementById('contests');
-      const relatedContests = response.contests;
+      const relatedCandidates = response.contests;
 
       let toDisplay = '';
-      relatedContests.forEach(data => {
-        toDisplay += `<li>${JSON.stringify(data).toString()} </li>`;
+      relatedCandidates.forEach(data => {
+        if (data.type === 'General') {
+          for (let i = 0; i < arrlength; i++) {
+            const person = {
+              name: `${data.candidates[i].name}`,
+              party: `${data.candidates[i].party}`,
+              site: `${data.candidates[i].candidateUrl}`
+            };
+            toDisplay += `<div style="float: left; padding-left: 10px; padding-right: 10px; padding-bottom: 30px; width: 30%;"><li>Name: ${
+              person.name
+            } <br/> Party: ${person.party} <br/> Website: <a href="${
+              person.site
+            }">Visit</a> <br/> </li> </div>`;
+          }
+          j++;
+        }
       });
-      c.innerHTML = `<h2>Additional Information</h2>
+      c.innerHTML = `<h2>Candidates/Additional Information</h2>
       <hr />
       <ol> ${toDisplay} </ol>`;
     }
 
     if (lenLocationPolls > 0) {
       const pollingLocation = response.pollingLocations[0].address;
-      let pollingAddress = `<h2>According to your Address </h2><hr/> <li>Nearest Polling Location: 
+      let pollingAddress = `<h2>According to your Address </h2><hr/> <li>Nearest Polling Location:
       ${pollingLocation.line1} ${pollingLocation.city} ${
         pollingLocation.state
       } ${pollingLocation.zip}
