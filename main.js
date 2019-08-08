@@ -1,4 +1,4 @@
-/**
+/** Written By: Carlos Chavarria, Using the Google Civics API
  * Build and execute request to look up voter info for provided address.
  * @param {string} address Address for which to fetch voter info.
  * @param {function(Object)} callback Function which takes the
