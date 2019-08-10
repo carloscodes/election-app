@@ -70,16 +70,27 @@ function renderResults(response) {
     relatedCandidates.forEach(data => {
       if (data.type === 'General') {
         for (let i = 0; i < arrlength; i++) {
+          let siteMsg = '';
+
           const person = {
             name: `${data.candidates[i].name}`,
             party: `${data.candidates[i].party}`,
             site: `${data.candidates[i].candidateUrl}`
           };
+          if (data.candidates[i].candidateUrl) {
+            siteMsg = 'Visit';
+          } else {
+            siteMsg = 'Website no longer exists.';
+            person.site = '#';
+          }
+
           toDisplay += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${
             person.name
-          } <br/> Party: ${person.party} <br/> Website: <a href="${
+          } <br/> Party: ${
+            person.party
+          } <br/> Website: <a style="text-decoration: none;" target="blank" href="${
             person.site
-          }">Visit</a> <br/> </li> </div>`;
+          }">${siteMsg}</a> <br/> </li> </div>`;
         }
         j++;
       }
