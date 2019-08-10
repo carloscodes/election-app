@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <script src="main.js" defer></script>
     <script src="https://apis.google.com/js/client.js?"></script>
     <!-- Latest compiled and minified CSS -->
@@ -30,12 +34,14 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJgfNLOploRL4IlUVb_-neeJzuHypU0A0"
     ></script>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <script src="https://kit.fontawesome.com/477a4c25de.js"></script>
   </head>
   <style>
+    html,
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
     #address {
       width: 50%;
       height: 30px;
@@ -44,15 +50,22 @@
     .centerInput {
       text-align: center;
     }
+
+    #footer {
+      text-align: center;
+      padding-bottom: 3%;
+      font-style: italic;
+      padding-top: 10%;
+    }
   </style>
 
   <body>
     <div class="container">
       <br />
       <div class="centerInput">
-        <br />
-        <br />
-        <p>
+        <h1>InformU.S <i class="fas fa-flag-usa"></i></h1>
+
+        <p style="padding-top: 10%;">
           Enter Address or Click The Green Button To Find Your Location:
         </p>
         <br />
@@ -71,7 +84,7 @@
           class="btn btn-success"
           onclick="getLocation();"
         >
-          <i class="fa fa-map-marker"></i>
+          <i class="fas fa-search-location"></i>
         </button>
       </div>
       <br />
@@ -80,5 +93,9 @@
       <br />
       <div id="contests"></div>
     </div>
+
+    <h5 id="footer">
+      Find Voter information on candidates and propositions around your area
+    </h5>
   </body>
 </html>
