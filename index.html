@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="main.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
@@ -36,62 +37,52 @@
 
     <script src="https://kit.fontawesome.com/477a4c25de.js"></script>
   </head>
-  <style>
-    html,
-    body {
-      font-family: 'Roboto', sans-serif;
-    }
-
-    #address {
-      width: 50%;
-      height: 30px;
-    }
-
-    .centerInput {
-      text-align: center;
-    }
-
-    #footer {
-      text-align: center;
-      padding-bottom: 3%;
-      font-style: italic;
-      padding-top: 10%;
-    }
-  </style>
 
   <body>
+    <nav class="navbar navbar-dark bg-primary">
+      <!-- Navbar content -->
+      <h1 style="padding-left: 2%;">
+        InformU.S <i class="fas fa-flag-usa"></i>
+        <div
+          style="font-size: 30px; float: right; list-style-type: none; padding-right: 2%; display: inline;"
+        >
+          <a id="out" href="about.html">
+            About
+          </a>
+        </div>
+      </h1>
+    </nav>
     <div class="container">
       <br />
       <div class="centerInput">
-        <h1>InformU.S <i class="fas fa-flag-usa"></i></h1>
-
-        <p style="padding-top: 10%;">
+        <p style="padding-top: 10%; font-style: italic">
           Enter Address or Click The Green Button To Find Your Location:
         </p>
         <br />
-        <input placeholder=" Address" type="text" id="address" />
-        <button
-          id="vals"
-          type="button"
-          class="btn btn-primary"
-          onclick="takeAddress();"
-        >
-          Enter
-        </button>
-        <button
-          id="geolo"
-          type="button"
-          class="btn btn-success"
-          onclick="getLocation();"
-        >
-          <i class="fas fa-search-location"></i>
-        </button>
+        <div class="searchField">
+          <input placeholder=" Address" type="text" id="address" />
+          <button
+            id="vals"
+            type="button"
+            class="btn btn-primary"
+            onclick="takeAddress();"
+          >
+            Enter
+          </button>
+          <button
+            id="geolo"
+            type="button"
+            class="btn btn-success"
+            onclick="getLocation();"
+          >
+            <i class="fas fa-search-location"></i>
+          </button>
+        </div>
+
+        <ul id="results"></ul>
+        <br />
+        <div id="contests"></div>
       </div>
-      <br />
-      <br />
-      <ul id="results"></ul>
-      <br />
-      <div id="contests"></div>
     </div>
 
     <h5 id="footer">

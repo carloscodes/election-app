@@ -43,7 +43,7 @@ function renderResults(response) {
     let alertUser = document.getElementById('results');
     alertUser.style = `color: black; font-style: italic; font-size: 20px; text-align: center;`;
     let nod = document.createTextNode(
-      'Could not find a polling place with the address provided. If you would like this information try entering your home address. '
+      'Could not find a polling place with the address provided.'
     );
     alertUser.appendChild(nod);
     setTimeout(() => {
@@ -82,14 +82,14 @@ function renderResults(response) {
         j++;
       }
     });
-    c.innerHTML = `<h2>Candidates/Additional Information</h2>
+    c.innerHTML = `<h2>Candidates</h2>
       <hr />
       <ol> ${toDisplay} </ol>`;
   }
 
   if (lenLocationPolls > 0) {
     const pollingLocation = response.pollingLocations[0].address;
-    let pollingAddress = `<h2>According to your Address </h2><hr/> <li>Nearest Polling Location:
+    let pollingAddress = `<h2>According to your Address </h2><hr/> <li style="list-style-type: none">Nearest Polling Location:
       ${pollingLocation.line1} ${pollingLocation.city} ${
       pollingLocation.state
     } ${pollingLocation.zip}
