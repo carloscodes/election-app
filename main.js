@@ -40,11 +40,16 @@ function renderResults(response) {
   let lenLocationPolls = 0;
 
   if (!response.pollingLocations) {
-    el.appendChild(
-      document.createTextNode(
-        'Could not find polling place with given address. Enter home address to show a voting location near you. '
-      )
+    let alertUser = document.getElementById('results');
+    alertUser.style = `color: black; font-style: italic; font-size: 20px; text-align: center;`;
+    let nod = document.createTextNode(
+      'Could not find a polling place with the address provided. If you would like this information try entering your home address. '
     );
+    alertUser.appendChild(nod);
+    setTimeout(() => {
+      alertUser.removeChild(nod);
+      alertUser.style = '';
+    }, 6000);
   } else {
     lenLocationPolls = response.pollingLocations.length;
   }
@@ -122,7 +127,3 @@ takeAddress = () => {
 // submit button
 const s = document.getElementById('vals');
 s.addEventListener('onclick', takeAddress);
-
-navigator.geolocation.getCurrentPosition(function(position) {
-  console.log(position.coords.latitude, position.coords.longitude);
-});
