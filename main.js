@@ -58,7 +58,7 @@ function renderResults(response) {
   console.log(response.contests);
 
   let j = 0;
-  let arrlength = response.contests[j].candidates.length;
+  let arrlength = 0;
 
   if (lenContests > 0) {
     let c = document.getElementById('candidates');
@@ -69,6 +69,7 @@ function renderResults(response) {
     let prop = '';
     relatedCandidates.forEach(data => {
       if (data.type === 'General') {
+        arrlength = response.contests[j].candidates.length;
         for (let i = 0; i < arrlength; i++) {
           let siteMsg = '';
 
