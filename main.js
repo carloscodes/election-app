@@ -124,14 +124,51 @@ takeAddress = () => {
   lookup(`${s}`, renderResults);
 };
 
-// submit button
+// enter button
 const s = document.getElementById('vals');
 s.addEventListener('onclick', takeAddress);
 
 getLocation = () => {
-  navigator.geolocation.getCurrentPosition(position => {
+  var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 10000
+  };
+
+  function success(position) {
     const lati = position.coords.latitude;
     const longi = position.coords.longitude;
-    console.log(lati, longi);
-  });
+
+    let address = '';
+
+    let geocoder = new google.maps.Geocoder();
+
+    let latlng = { lat: parseFloat(lati), lng: parseFloat(longi) };
+    console.log(latlng);
+
+    geocoder.geocode({ location: latlng }, function(results, status) {
+      if (status === 'OK') {
+        if (results[0]) {
+          address = results[0].formatted_address;
+          console.log(position.coords.accuracy);
+          userInput.value = address;
+          gapi.client.setApiKey('AIzaSyDMaos2Ppqe76FRC6cII_k-oC2gi89MeUc');
+          lookup(address, renderResults);
+        } else {
+          console.log('no results found. ');
+        }
+      } else {
+        console.log('Geocoder failed due to: ' + status);
+      }
+    });
+  }
+
+  function error() {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  navigator.geolocation.getCurrentPosition(success, error, options);
 };
+
+const geo = document.getElementById('geolo');
+geo.addEventListener('onclick', getLocation);
