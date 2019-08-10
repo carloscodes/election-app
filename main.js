@@ -61,7 +61,7 @@ function renderResults(response) {
   let arrlength = response.contests[j].candidates.length;
 
   if (lenContests > 0) {
-    let c = document.getElementById('contests');
+    let c = document.getElementById('candidates');
     const relatedCandidates = response.contests;
 
     let toDisplay = '';
