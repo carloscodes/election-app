@@ -127,3 +127,11 @@ takeAddress = () => {
 // submit button
 const s = document.getElementById('vals');
 s.addEventListener('onclick', takeAddress);
+
+getLocation = () => {
+  navigator.geolocation.getCurrentPosition(position => {
+    const lati = position.coords.latitude;
+    const longi = position.coords.longitude;
+    console.log(lati, longi);
+  });
+};

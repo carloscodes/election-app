@@ -23,6 +23,17 @@
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
       crossorigin="anonymous"
     ></script>
+
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJgfNLOploRL4IlUVb_-neeJzuHypU0A0&callback=initMap"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
   </head>
   <style>
     #address {
@@ -39,7 +50,9 @@
     <div class="container">
       <br />
       <div class="centerInput">
-        <p>Enter your address:</p>
+        <p>
+          Enter Address or Click The Green Button To Find Your Location:
+        </p>
         <input placeholder=" Address" type="text" id="address" />
         <button
           id="vals"
@@ -47,7 +60,15 @@
           class="btn btn-primary"
           onclick="takeAddress();"
         >
-          Submit
+          Enter
+        </button>
+        <button
+          id="vals"
+          type="button"
+          class="btn btn-success"
+          onclick="getLocation();"
+        >
+          <i class="fa fa-map-marker"></i>
         </button>
       </div>
       <ul id="results"></ul>
