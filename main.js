@@ -28,6 +28,7 @@ function lookup(address, callback) {
  * @param {Object} rawResponse Raw response from the API.
  */
 function renderResults(response) {
+  console.log(response);
   var el = document.getElementById('results');
   if (!response || response.error) {
     el.appendChild(
@@ -36,55 +37,60 @@ function renderResults(response) {
     return;
   }
 
-  try {
-    const lenLocationPolls = response.pollingLocations.length;
-    const lenContests = response.contests.length;
-    // console.log(lenContests);
-    console.log(response.contests);
+  let lenLocationPolls = 0;
 
-    let j = 0;
-    let arrlength = response.contests[j].candidates.length;
+  if (!response.pollingLocations) {
+    el.appendChild(
+      document.createTextNode(
+        'Could not find polling place with given address. Enter home address to show a voting location near you. '
+      )
+    );
+  } else {
+    lenLocationPolls = response.pollingLocations.length;
+  }
+  const lenContests = response.contests.length;
+  // console.log(lenContests);
+  console.log(response.contests);
 
-    if (lenContests > 0) {
-      let c = document.getElementById('contests');
-      const relatedCandidates = response.contests;
+  let j = 0;
+  let arrlength = response.contests[j].candidates.length;
 
-      let toDisplay = '';
-      relatedCandidates.forEach(data => {
-        if (data.type === 'General') {
-          for (let i = 0; i < arrlength; i++) {
-            const person = {
-              name: `${data.candidates[i].name}`,
-              party: `${data.candidates[i].party}`,
-              site: `${data.candidates[i].candidateUrl}`
-            };
-            toDisplay += `<div style="float: left; padding-left: 10px; padding-right: 10px; padding-bottom: 30px; width: 30%;"><li>Name: ${
-              person.name
-            } <br/> Party: ${person.party} <br/> Website: <a href="${
-              person.site
-            }">Visit</a> <br/> </li> </div>`;
-          }
-          j++;
+  if (lenContests > 0) {
+    let c = document.getElementById('contests');
+    const relatedCandidates = response.contests;
+
+    let toDisplay = '';
+    relatedCandidates.forEach(data => {
+      if (data.type === 'General') {
+        for (let i = 0; i < arrlength; i++) {
+          const person = {
+            name: `${data.candidates[i].name}`,
+            party: `${data.candidates[i].party}`,
+            site: `${data.candidates[i].candidateUrl}`
+          };
+          toDisplay += `<div style="float: left; padding-right: 10px; padding-bottom: 30px; width: 30%;"><li>Name: ${
+            person.name
+          } <br/> Party: ${person.party} <br/> Website: <a href="${
+            person.site
+          }">Visit</a> <br/> </li> </div>`;
         }
-      });
-      c.innerHTML = `<h2>Candidates/Additional Information</h2>
+        j++;
+      }
+    });
+    c.innerHTML = `<h2>Candidates/Additional Information</h2>
       <hr />
       <ol> ${toDisplay} </ol>`;
-    }
+  }
 
-    if (lenLocationPolls > 0) {
-      const pollingLocation = response.pollingLocations[0].address;
-      let pollingAddress = `<h2>According to your Address </h2><hr/> <li>Nearest Polling Location:
+  if (lenLocationPolls > 0) {
+    const pollingLocation = response.pollingLocations[0].address;
+    let pollingAddress = `<h2>According to your Address </h2><hr/> <li>Nearest Polling Location:
       ${pollingLocation.line1} ${pollingLocation.city} ${
-        pollingLocation.state
-      } ${pollingLocation.zip}
+      pollingLocation.state
+    } ${pollingLocation.zip}
       
       </li>`;
-      el.innerHTML = pollingAddress;
-    }
-  } catch (error) {
-    el.appendChild(document.createTextNode('Could not find polling place'));
-    console.log(error);
+    el.innerHTML = pollingAddress;
   }
 }
 
@@ -93,6 +99,18 @@ const userInput = document.getElementById('address');
 
 takeAddress = () => {
   let s = userInput.value;
+  if (!s) {
+    let alertUser = document.getElementById('results');
+    alertUser.style = `color: red; font-size: 20px; text-align: center;`;
+    let nod = document.createTextNode('Enter a valid address. ');
+    alertUser.appendChild(nod);
+    setTimeout(() => {
+      alertUser.removeChild(nod);
+      alertUser.style = '';
+    }, 3000);
+    return;
+  }
+
   console.log(s);
   /**
    * Initialize the API client and make a request.
@@ -104,3 +122,7 @@ takeAddress = () => {
 // submit button
 const s = document.getElementById('vals');
 s.addEventListener('onclick', takeAddress);
+
+navigator.geolocation.getCurrentPosition(function(position) {
+  console.log(position.coords.latitude, position.coords.longitude);
+});
