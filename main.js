@@ -73,7 +73,7 @@ function renderResults(response) {
             party: `${data.candidates[i].party}`,
             site: `${data.candidates[i].candidateUrl}`
           };
-          toDisplay += `<div style="float: left; padding-right: 10px; padding-bottom: 30px; width: 30%;"><li>Name: ${
+          toDisplay += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${
             person.name
           } <br/> Party: ${person.party} <br/> Website: <a href="${
             person.site
@@ -82,7 +82,7 @@ function renderResults(response) {
         j++;
       }
     });
-    c.innerHTML = `<h2>Candidates</h2>
+    c.innerHTML = `<h2>Representatives/Candidates</h2>
       <hr />
       <ol> ${toDisplay} </ol>`;
   }

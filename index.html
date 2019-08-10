@@ -44,7 +44,7 @@
       <h1 style="padding-left: 2%;">
         InformU.S <i class="fas fa-flag-usa"></i>
         <div
-          style="font-size: 30px; float: right; list-style-type: none; padding-right: 2%; display: inline;"
+          style="font-size: 30px; float: right; list-style-type: none; padding-right: 2%;"
         >
           <a id="out" href="about.html">
             About
@@ -55,29 +55,36 @@
     <div class="container">
       <br />
       <div class="centerInput">
-        <p style="padding-top: 10%; font-style: italic">
+        <p style="font-size: 20px; padding-top: 10%; font-style: italic">
           Enter Address or Click The Green Button To Find Your Location:
         </p>
         <br />
         <div class="searchField">
-          <input placeholder=" Address" type="text" id="address" />
-          <button
-            id="vals"
-            type="button"
-            class="btn btn-primary"
-            onclick="takeAddress();"
-          >
-            Enter
-          </button>
-          <button
-            id="geolo"
-            type="button"
-            class="btn btn-success"
-            onclick="getLocation();"
-          >
-            <i class="fas fa-search-location"></i>
-          </button>
+          <input
+            placeholder="Address"
+            type="text"
+            class="form-control"
+            id="address"
+          />
         </div>
+        <button
+          id="vals"
+          type="button"
+          class="btn btn-primary"
+          onclick="takeAddress();"
+        >
+          Enter
+        </button>
+
+        <button
+          id="geolo"
+          type="button"
+          class="btn btn-success"
+          onclick="getLocation();"
+        >
+          <i class="fas fa-search-location"></i>
+        </button>
+        <!--</div> -->
 
         <ul id="results"></ul>
         <br />

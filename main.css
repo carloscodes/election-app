@@ -4,12 +4,26 @@ body {
 }
 
 #address {
-  width: 50%;
+  width: 40%;
   height: 30px;
+  display: inline-block;
+  transform: scale(1.6);
+}
+
+#vals {
+  margin-top: 4%;
+  margin-right: 5%;
+  transform: scale(1.7);
+}
+
+#geolo {
+  margin-top: 4%;
+  transform: scale(1.7);
 }
 
 #results {
   padding-top: 4%;
+  text-align: center;
 }
 
 .centerInput {
