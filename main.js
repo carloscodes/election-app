@@ -62,9 +62,11 @@ function renderResults(response) {
 
   if (lenContests > 0) {
     let c = document.getElementById('candidates');
+    let r = document.getElementById('referendums');
     const relatedCandidates = response.contests;
 
     let toDisplay = '';
+    let prop = '';
     relatedCandidates.forEach(data => {
       if (data.type === 'General') {
         for (let i = 0; i < arrlength; i++) {
@@ -81,20 +83,33 @@ function renderResults(response) {
         }
         j++;
       }
+
+      if (data.type === 'Referendum') {
+        console.log(data.referendumTitle);
+        prop += `<div style="float:left; padding-right: 5px; padding-bottom: 30px;  width: 30%;">
+        <p>
+            ${data.referendumTitle} <br/>
+            ${data.referendumSubtitle}<br/>
+          <a target="blank" href="${data.referendumUrl}"> Learn More </a><br/>
+          </p>
+        </div>`;
+      }
     });
     c.innerHTML = `<h2>Representatives/Candidates</h2>
       <hr />
       <ol> ${toDisplay} </ol>`;
+
+    r.innerHTML = `<h2>Referendums/Propositions </h2> <hr/> <ol>${prop} </ol>`;
   }
 
   if (lenLocationPolls > 0) {
     const pollingLocation = response.pollingLocations[0].address;
-    let pollingAddress = `<h2>According to your Address </h2><hr/> <li style="list-style-type: none">Nearest Polling Location:
+    let pollingAddress = `<h2>According to your Address </h2><hr/> <p>Nearest Polling Location:
       ${pollingLocation.line1} ${pollingLocation.city} ${
       pollingLocation.state
     } ${pollingLocation.zip}
       
-      </li>`;
+      </p>`;
     el.innerHTML = pollingAddress;
   }
 }
