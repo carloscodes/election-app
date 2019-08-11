@@ -145,11 +145,13 @@ function checkElectionsForMatch(addrs) {
         } <h3>`;
       }
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
-    } else {
-      electionsFound = 'There are no elections for your area at this time.';
-      e.innerHTML = `<h2>${electionsFound} </h2>`;
     }
   });
+
+  if (electionsFound === '') {
+    electionsFound = 'There are no elections for your area at this time.';
+    e.innerHTML = `<h2>${electionsFound} </h2>`;
+  }
 }
 
 function getRepresentatives(address, callback) {
