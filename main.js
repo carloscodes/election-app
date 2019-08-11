@@ -22,6 +22,74 @@ function lookup(address, callback) {
   req.execute(callback);
 }
 
+function getRepresentatives(address, callback) {
+  var electionId = 2000;
+
+  /**
+   * Request object for given parameters.
+   * @type {gapi.client.HttpRequest}
+   */
+  var req = gapi.client.request({
+    path: '/civicinfo/v2/representatives',
+    params: { electionId: electionId, address: address }
+  });
+  req.execute(callback);
+}
+
+function reps(response) {
+  let repLen = response.officials.length;
+  console.log(repLen);
+  let listOfReps = response.officials;
+  console.log(listOfReps);
+
+  let mr = document.getElementById('myReps');
+  let displayReps = '';
+
+  if (!response || response.error) {
+    mr.appendChild(
+      document.createTextNode('Error while fetching your representatives.')
+    );
+    return;
+  }
+
+  listOfReps.forEach(data => {
+    let phone = '';
+    let site = '';
+
+    let msg = '';
+    let phMsg = '';
+
+    if (data.hasOwnProperty('urls')) {
+      site = data.urls[0];
+      msg = 'Visit';
+    }
+
+    if (data.hasOwnProperty('phones')) {
+      phone = data.phones[0];
+      phMsg = `${data.phones[0]}`;
+    }
+
+    const person = {
+      name: data.name,
+      party: data.party,
+      phone: phone,
+      url: site
+    };
+
+    displayReps += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${
+      person.name
+    } <br/> Party: ${
+      person.party
+    } <br/> Website: <a style="text-decoration: none;" target="blank" href="${
+      person.url
+    }">${msg}</a> <br/> Phone: <a href="tel+${
+      person.phone
+    }"> ${phMsg}</a> </li> </div>`;
+  });
+
+  mr.innerHTML = `<h2>Your Representatives </h2> <hr/> <ol>${displayReps} </ol>`;
+}
+
 /**
  * Render results in the DOM.
  * @param {Object} response Response object returned by the API.
@@ -71,19 +139,19 @@ function renderResults(response) {
       if (data.type === 'General') {
         arrlength = response.contests[j].candidates.length;
         for (let i = 0; i < arrlength; i++) {
-          let siteMsg = '';
+          let site = '';
+          let msg = '';
+
+          if (data.candidates[i].hasOwnProperty('candidateUrl')) {
+            site = data.candidates[i].candidateUrl;
+            msg = 'Visit';
+          }
 
           const person = {
             name: `${data.candidates[i].name}`,
             party: `${data.candidates[i].party}`,
-            site: `${data.candidates[i].candidateUrl}`
+            site: site
           };
-          if (data.candidates[i].candidateUrl) {
-            siteMsg = 'Visit';
-          } else {
-            siteMsg = 'Website no longer exists.';
-            person.site = '#';
-          }
 
           toDisplay += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${
             person.name
@@ -91,7 +159,7 @@ function renderResults(response) {
             person.party
           } <br/> Website: <a style="text-decoration: none;" target="blank" href="${
             person.site
-          }">${siteMsg}</a> <br/> </li> </div>`;
+          }">${msg}</a> <br/> </li> </div>`;
         }
         j++;
       }
@@ -107,7 +175,7 @@ function renderResults(response) {
         </div>`;
       }
     });
-    c.innerHTML = `<h2>Representatives/Candidates</h2>
+    c.innerHTML = `<h2>Candidates For Current Elections</h2>
       <hr />
       <ol> ${toDisplay} </ol>`;
 
@@ -149,6 +217,7 @@ takeAddress = () => {
    */
   gapi.client.setApiKey('AIzaSyDMaos2Ppqe76FRC6cII_k-oC2gi89MeUc');
   lookup(`${s}`, renderResults);
+  getRepresentatives(s, reps);
 };
 
 // enter button
