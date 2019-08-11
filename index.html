@@ -56,7 +56,7 @@
       <br />
       <div class="centerInput">
         <p style="font-size: 20px; padding-top: 10%; font-style: italic">
-          Enter Address or Click The Green Button To Find Your Location:
+          Click The Green Button To Find Your Location:
         </p>
         <br />
         <div class="searchField">
@@ -65,16 +65,9 @@
             type="text"
             class="form-control"
             id="address"
+            readonly
           />
         </div>
-        <button
-          id="vals"
-          type="button"
-          class="btn btn-primary"
-          onclick="takeAddress();"
-        >
-          Enter
-        </button>
 
         <button
           id="geolo"
@@ -85,6 +78,7 @@
           <i class="fas fa-search-location"></i>
         </button>
 
+        <div style="padding-top: 5%" id="elections"></div>
         <div id="results"></div>
         <br />
         <div style="padding-top: 5%;" id="candidates"></div>
