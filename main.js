@@ -246,10 +246,11 @@ getLocation = () => {
       if (status === 'OK') {
         if (results[0]) {
           address = results[0].formatted_address;
-          console.log(position.coords.accuracy);
+
           userInput.value = address;
           gapi.client.setApiKey('AIzaSyDMaos2Ppqe76FRC6cII_k-oC2gi89MeUc');
           lookup(address, renderResults);
+          getRepresentatives(address, reps);
         } else {
           console.log('no results found. ');
         }
