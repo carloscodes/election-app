@@ -186,15 +186,8 @@ function reps(response) {
 
   listOfReps.forEach(data => {
     let phone = '';
-    let site = '';
 
-    let msg = '';
     let phMsg = '';
-
-    if (data.hasOwnProperty('urls')) {
-      site = data.urls[0];
-      msg = 'Visit';
-    }
 
     if (data.hasOwnProperty('phones')) {
       phone = data.phones[0];
@@ -204,17 +197,12 @@ function reps(response) {
     const person = {
       name: data.name,
       party: data.party,
-      phone: phone,
-      url: site
+      phone: phone
     };
 
     displayReps += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${
       person.name
-    } <br/> Party: ${
-      person.party
-    } <br/> Website: <a style="text-decoration: none;" target="blank" href="${
-      person.url
-    }">${msg}</a> <br/> Phone: <a href="tel+${
+    } <br/> Party: ${person.party} <br/>  Phone: <a href="tel+${
       person.phone
     }"> ${phMsg}</a> </li> </div>`;
   });
