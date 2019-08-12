@@ -371,7 +371,7 @@ getLocation = () => {
 
           userInput.value = address;
           gapi.client.setApiKey('AIzaSyDMaos2Ppqe76FRC6cII_k-oC2gi89MeUc');
-          //lookup(address, renderResults);
+          lookup(address, renderResults);
           getRepresentatives(address, reps);
         } else {
           console.log('no results found. ');
