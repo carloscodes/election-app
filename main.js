@@ -4,71 +4,6 @@
  * @param {function(Object)} callback Function which takes the
  *     response object as a parameter.
  */
-const electionsCA = [
-  {
-    id: 4834,
-    name: 'Los Angeles City Council District 12 Runoff Election',
-    electionDay: '2019-08-13',
-    ocdDivisionId: 'ocd-division/country:us/state:ca/county:los_angeles'
-  },
-  {
-    id: 4838,
-    name: 'San Bernardino County Consolidated Mail Election',
-    electionDay: '2019-08-27',
-    ocdDivisionId: 'ocd-division/country:us/state:ca/county:san_bernardino'
-  }
-];
-
-const electionMN = [
-  {
-    id: 4835,
-    name: 'Minnesota Primary Election',
-    electionDay: '2019-08-13',
-    ocdDivisionId: 'ocd-division/country:us/state:mn'
-  }
-];
-
-const electionOK = [
-  {
-    id: 4836,
-    name: 'Oklahoma Special Election',
-    electionDay: '2019-08-13',
-    ocdDivisionId: 'ocd-division/country:us/state:ok'
-  }
-];
-
-const electionUT = [
-  {
-    id: '4837',
-    name: 'Utah Municipal Primary Election',
-    electionDay: '2019-08-13',
-    ocdDivisionId: 'ocd-division/country:us/state:ut'
-  }
-];
-
-const electionAL = [
-  {
-    id: 4841,
-    name: 'City of Talladega and City of Montgomery Municipal Election',
-    electionDay: '2019-08-27',
-    ocdDivisionId: 'ocd-division/country:us/state:al'
-  },
-  {
-    id: 4856,
-    name: 'Alabama State House District 42 Special Primary Election',
-    electionDay: '2019-08-20',
-    ocdDivisionId: 'ocd-division/country:us/state:al/sldl:42'
-  }
-];
-
-const electionNC = [
-  {
-    id: 4845,
-    name: 'North Carolina Primary Election',
-    electionDay: '2019-09-10',
-    ocdDivisionId: 'ocd-division/country:us/state:nc'
-  }
-];
 
 function lookup(address, callback) {
   /**
@@ -88,62 +23,65 @@ function lookup(address, callback) {
   req.execute(callback);
 }
 
+// stores all election info
+let arr = [];
+
+// gather all elections
+async function getElections() {
+  await fetch(
+    'https://www.googleapis.com/civicinfo/v2/elections?key=AIzaSyDMaos2Ppqe76FRC6cII_k-oC2gi89MeUc'
+  )
+    .then(blob => blob.json())
+    .then(data => {
+      for (let i = 0; i < data.elections.length; i++) {
+        arr.push(data.elections[i]);
+      }
+    });
+}
+
+getElections();
+
 function checkElectionsForMatch(addrs) {
   let e = document.getElementById('elections');
   let electionsFound = '';
-  let len = 0;
 
   addrs.forEach(data => {
+    // index 1 and 5
     if (data.long_name === 'California' || data.short_name === 'CA') {
-      len = electionsCA.length;
-      for (let i = 0; i < len; i++) {
-        electionsFound += `<h3>${electionsCA[i].name} ${
-          electionsCA[i].electionDay
-        } <h3>`;
-      }
+      electionsFound += `<h3>${arr[1].name} ${arr[1].electionDay} <h3>`;
+      electionsFound += `<h3>${arr[5].name} ${arr[5].electionDay} <h3>`;
+
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
-    } else if (data.long_name === 'Alabama' || data.short_name === 'AL') {
-      len = electionsAL.length;
-      for (let i = 0; i < len; i++) {
-        electionsFound += `<h3>${electionsAL[i].name} ${
-          electionsAL[i].electionDay
-        } <h3>`;
-      }
+    }
+    // index 8 and 6
+    else if (data.long_name === 'Alabama' || data.short_name === 'AL') {
+      electionsFound += `<h3>${arr[6].name} ${arr[6].electionDay} <h3>`;
+      electionsFound += `<h3>${arr[8].name} ${arr[8].electionDay} <h3>`;
+
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
-    } else if (
-      data.long_name === 'North Carolina' ||
-      data.short_name === 'NC'
-    ) {
-      len = electionsNC.length;
-      for (let i = 0; i < len; i++) {
-        electionsFound += `<h3>${electionsNC[i].name} ${
-          electionsNC[i].electionDay
-        } <h3>`;
-      }
+    }
+    // index 7
+    else if (data.long_name === 'North Carolina' || data.short_name === 'NC') {
+      electionsFound += `<h3>${arr[7].name} ${arr[7].electionDay} <h3>`;
+
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
-    } else if (data.long_name === 'Utah' || data.short_name === 'UT') {
-      len = electionsUT.length;
-      for (let i = 0; i < len; i++) {
-        electionsFound += `<h3>${electionsUT[i].name} ${
-          electionsUT[i].electionDay
-        } <h3>`;
-      }
+    }
+    // index 4
+    else if (data.long_name === 'Utah' || data.short_name === 'UT') {
+      electionsFound += `<h3>${arr[4].name} ${arr[4].electionDay} <h3>`;
+
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
-    } else if (data.long_name === 'Minnesota' || data.short_name === 'MN') {
-      len = electionsMN.length;
-      for (let i = 0; i < len; i++) {
-        electionsFound += `<h3>${electionsMN[i].name} ${
-          electionsMN[i].electionDay
-        } <h3>`;
-      }
+    }
+    // index 2
+    else if (data.long_name === 'Minnesota' || data.short_name === 'MN') {
+      electionsFound += `<h3>${arr[2].name} ${arr[2].electionDay} <h3>`;
+
       e.innerHTML = `<h2>Upcoming elections around you: </h2> ${electionsFound}`;
-    } else if (data.long_name === 'Oklahoma' || data.short_name === 'OK') {
-      len = electionsOK.length;
-      for (let i = 0; i < len; i++) {
-        electionsFound += `<h3>${electionsOK[i].name} ${
-          electionsOK[i].electionDay
-        } <h3>`;
-      }
+    }
+    // index 3
+    else if (data.long_name === 'Oklahoma' || data.short_name === 'OK') {
+      electionsFound += `<h3>${arr[3].name} ${arr[3].electionDay} <h3>`;
+
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
     }
   });
