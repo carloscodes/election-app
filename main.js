@@ -33,6 +33,7 @@ async function getElections() {
   )
     .then(blob => blob.json())
     .then(data => {
+      console.log(data);
       for (let i = 0; i < data.elections.length; i++) {
         arr.push(data.elections[i]);
       }
@@ -46,40 +47,22 @@ function checkElectionsForMatch(addrs) {
   let electionsFound = '';
 
   addrs.forEach(data => {
-    // index 1 and 5
+    // index 1
     if (data.long_name === 'California' || data.short_name === 'CA') {
       electionsFound += `<h3>${arr[1].name} ${arr[1].electionDay} <h3>`;
-      electionsFound += `<h3>${arr[5].name} ${arr[5].electionDay} <h3>`;
+      //electionsFound += `<h3>${arr[5].name} ${arr[5].electionDay} <h3>`;
 
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
     }
-    // index 8 and 6
+    // index 2 and 4
     else if (data.long_name === 'Alabama' || data.short_name === 'AL') {
-      electionsFound += `<h3>${arr[6].name} ${arr[6].electionDay} <h3>`;
-      electionsFound += `<h3>${arr[8].name} ${arr[8].electionDay} <h3>`;
-
-      e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
-    }
-    // index 7
-    else if (data.long_name === 'North Carolina' || data.short_name === 'NC') {
-      electionsFound += `<h3>${arr[7].name} ${arr[7].electionDay} <h3>`;
-
-      e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
-    }
-    // index 4
-    else if (data.long_name === 'Utah' || data.short_name === 'UT') {
+      electionsFound += `<h3>${arr[2].name} ${arr[2].electionDay} <h3>`;
       electionsFound += `<h3>${arr[4].name} ${arr[4].electionDay} <h3>`;
 
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
     }
-    // index 2
-    else if (data.long_name === 'Minnesota' || data.short_name === 'MN') {
-      electionsFound += `<h3>${arr[2].name} ${arr[2].electionDay} <h3>`;
-
-      e.innerHTML = `<h2>Upcoming elections around you: </h2> ${electionsFound}`;
-    }
     // index 3
-    else if (data.long_name === 'Oklahoma' || data.short_name === 'OK') {
+    else if (data.long_name === 'North Carolina' || data.short_name === 'NC') {
       electionsFound += `<h3>${arr[3].name} ${arr[3].electionDay} <h3>`;
 
       e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
