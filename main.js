@@ -47,25 +47,30 @@ function checkElectionsForMatch(addrs) {
   let electionsFound = '';
 
   addrs.forEach(data => {
-    // index 1
+    // index 1 currently
     if (data.long_name === 'California' || data.short_name === 'CA') {
-      electionsFound += `<h3>${arr[1].name} ${arr[1].electionDay} <h3>`;
-      //electionsFound += `<h3>${arr[5].name} ${arr[5].electionDay} <h3>`;
+      if (arr[1]) {
+        electionsFound += `<h3>${arr[1].name} ${arr[1].electionDay} <h3>`;
 
-      e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+        e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+      }
     }
     // index 2 and 4
     else if (data.long_name === 'Alabama' || data.short_name === 'AL') {
-      electionsFound += `<h3>${arr[2].name} ${arr[2].electionDay} <h3>`;
-      electionsFound += `<h3>${arr[4].name} ${arr[4].electionDay} <h3>`;
+      if (arr[2] && arr[4]) {
+        electionsFound += `<h3>${arr[2].name} ${arr[2].electionDay} <h3>`;
+        electionsFound += `<h3>${arr[4].name} ${arr[4].electionDay} <h3>`;
 
-      e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+        e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+      }
     }
     // index 3
     else if (data.long_name === 'North Carolina' || data.short_name === 'NC') {
-      electionsFound += `<h3>${arr[3].name} ${arr[3].electionDay} <h3>`;
+      if (arr[3]) {
+        electionsFound += `<h3>${arr[3].name} ${arr[3].electionDay} <h3>`;
 
-      e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+        e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+      }
     }
   });
 
