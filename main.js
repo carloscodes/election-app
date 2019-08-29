@@ -48,26 +48,24 @@ function checkElectionsForMatch(addrs) {
 
   addrs.forEach(data => {
     // index 1 currently
-    if (data.long_name === 'California' || data.short_name === 'CA') {
+    if (data.long_name === 'Oklahoma' || data.short_name === 'OK') {
       if (arr[1]) {
         electionsFound += `<h3>${arr[1].name} ${arr[1].electionDay} <h3>`;
 
         e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
       }
-    }
-    // index 2 and 4
-    else if (data.long_name === 'Alabama' || data.short_name === 'AL') {
-      if (arr[2] && arr[4]) {
+    } else if (
+      data.long_name === 'North Carolina' ||
+      data.short_name === 'NC'
+    ) {
+      if (arr[2]) {
         electionsFound += `<h3>${arr[2].name} ${arr[2].electionDay} <h3>`;
-        electionsFound += `<h3>${arr[4].name} ${arr[4].electionDay} <h3>`;
 
         e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
       }
-    }
-    // index 3
-    else if (data.long_name === 'North Carolina' || data.short_name === 'NC') {
-      if (arr[3]) {
-        electionsFound += `<h3>${arr[3].name} ${arr[3].electionDay} <h3>`;
+    } else if (data.long_name === 'Georgia' || data.short_name === 'GA') {
+      if (arr[3] && arr[4]) {
+        electionsFound += `<h3>${arr[3].name} ${arr[3].electionDay} <h3> <h3>${arr[4].name} ${arr[4].electionDay} </h3>`;
 
         e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
       }
@@ -126,11 +124,7 @@ function reps(response) {
       phone: phone
     };
 
-    displayReps += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${
-      person.name
-    } <br/> Party: ${person.party} <br/>  Phone: <a href="tel+${
-      person.phone
-    }"> ${phMsg}</a> </li> </div>`;
+    displayReps += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${person.name} <br/> Party: ${person.party} <br/>  Phone: <a href="tel+${person.phone}"> ${phMsg}</a> </li> </div>`;
   });
 
   mr.innerHTML = `<h2>Your Representatives </h2> <hr/> <ol>${displayReps} </ol>`;
@@ -199,13 +193,7 @@ function renderResults(response) {
             site: site
           };
 
-          toDisplay += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${
-            person.name
-          } <br/> Party: ${
-            person.party
-          } <br/> Website: <a style="text-decoration: none;" target="blank" href="${
-            person.site
-          }">${msg}</a> <br/> </li> </div>`;
+          toDisplay += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${person.name} <br/> Party: ${person.party} <br/> Website: <a style="text-decoration: none;" target="blank" href="${person.site}">${msg}</a> <br/> </li> </div>`;
         }
         j++;
       }
@@ -231,9 +219,7 @@ function renderResults(response) {
   if (lenLocationPolls > 0) {
     const pollingLocation = response.pollingLocations[0].address;
     let pollingAddress = `<h2>According to your Address </h2><hr/> <p>Nearest Polling Location:
-      ${pollingLocation.line1} ${pollingLocation.city} ${
-      pollingLocation.state
-    } ${pollingLocation.zip}
+      ${pollingLocation.line1} ${pollingLocation.city} ${pollingLocation.state} ${pollingLocation.zip}
       
       </p>`;
     el.innerHTML = pollingAddress;
