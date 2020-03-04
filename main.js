@@ -52,7 +52,9 @@ function checkElectionsForMatch(addrs) {
       if (arr[1]) {
         electionsFound += `<h3>${arr[1].name} ${arr[1].electionDay} <h3>`;
 
-        e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+        e.innerHTML = `
+            <nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Elections</nav>
+            <h2 style="border-radius:0px 0px 5px 5px;margin-top: 0px; border: 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;">Upcoming elections around you: ${electionsFound}</h2>`;
       }
     } else if (
       data.long_name === 'North Carolina' ||
@@ -61,20 +63,24 @@ function checkElectionsForMatch(addrs) {
       if (arr[2]) {
         electionsFound += `<h3>${arr[2].name} ${arr[2].electionDay} <h3>`;
 
-        e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+        e.innerHTML = `<nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Elections</nav>
+<h2 style="border-radius:0px 0px 5px 5px;margin-top: 0px;border: 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;">Upcoming elections around you: ${electionsFound}</h2>`;
       }
     } else if (data.long_name === 'Georgia' || data.short_name === 'GA') {
       if (arr[3] && arr[4]) {
         electionsFound += `<h3>${arr[3].name} ${arr[3].electionDay} <h3> <h3>${arr[4].name} ${arr[4].electionDay} </h3>`;
 
-        e.innerHTML = `<h2>Upcoming elections around you: ${electionsFound}</h2>`;
+        e.innerHTML = `<nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Elections</nav>
+<h2 style="border-radius:0px 0px 5px 5px;margin-top: 0px; border: 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;">Upcoming elections around you: ${electionsFound}</h2>`;
       }
     }
   });
 
   if (electionsFound === '') {
     electionsFound = 'There are no elections for your area at this time.';
-    e.innerHTML = `<h2>${electionsFound} </h2>`;
+    e.innerHTML = `
+<nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Elections</nav>
+<h2 style="border-radius:0px 0px 5px 5px;margin-top: 0px;border: 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;">${electionsFound} </h2>`;
   }
 }
 
@@ -124,10 +130,12 @@ function reps(response) {
       phone: phone
     };
 
-    displayReps += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${person.name} <br/> Party: ${person.party} <br/>  Phone: <a href="tel+${person.phone}"> ${phMsg}</a> </li> </div>`;
+    displayReps += `<div style="overflow: hidden;float: left;padding-right: 5px; padding-top: 30px;padding-bottom: 30px;  width: calc(100%/3); border: double 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;"><li style="list-style-type: none">Name: ${person.name} <br/> Party: ${person.party} <br/>  Phone: <a href="tel+${person.phone}"> ${phMsg}</a> </li> </div>`;
   });
 
-  mr.innerHTML = `<h2>Your Representatives </h2> <hr/> <ol>${displayReps} </ol>`;
+  mr.innerHTML = `
+<nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Your Representatives</nav>
+<div>${displayReps} </div>`;
 }
 
 /**
@@ -192,15 +200,14 @@ function renderResults(response) {
             party: `${data.candidates[i].party}`,
             site: site
           };
-
-          toDisplay += `<div style="float: left;padding-right: 5px; padding-bottom: 30px;  width: 30%;"><li style="list-style-type: none">Name: ${person.name} <br/> Party: ${person.party} <br/> Website: <a style="text-decoration: none;" target="blank" href="${person.site}">${msg}</a> <br/> </li> </div>`;
+          toDisplay += `<div style="overflow: hidden;float: left;padding-right: 5px; padding-top: 30px;padding-bottom: 30px;  width: calc(100%/3); border: double 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;"><li style="list-style-type: none">Name: ${person.name} <br/> Party: ${person.party} <br/> Website: <a style="text-decoration: none;" target="blank" href="${person.site}">${msg}</a> <br/> </li> </div>`;
         }
         j++;
       }
 
       if (data.type === 'Referendum') {
         console.log(data.referendumTitle);
-        prop += `<div style="float:left; padding-right: 5px; padding-bottom: 30px;  width: 30%;">
+        prop += `<div style="overflow: hidden;float: left;height:150px; padding-right: 5px; padding-top: 20px;width: calc(100%/3); border: double 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;">
         <p>
             ${data.referendumTitle} <br/>
             ${data.referendumSubtitle}<br/>
@@ -209,18 +216,19 @@ function renderResults(response) {
         </div>`;
       }
     });
-    c.innerHTML = `<h2>Candidates For Current Elections</h2>
-      <hr />
-      <ol> ${toDisplay} </ol>`;
+    c.innerHTML = `<nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Candidates For Current Elections</nav>
+      <div> ${toDisplay}</div>`;
 
-    r.innerHTML = `<h2>Referendums/Propositions </h2> <hr/> <ol>${prop} </ol>`;
+    r.innerHTML = `<nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Referendums/Propositions</nav>
+<div>${prop} </div>`;
   }
 
   if (lenLocationPolls > 0) {
     const pollingLocation = response.pollingLocations[0].address;
-    let pollingAddress = `<h2>According to your Address </h2><hr/> <p>Nearest Polling Location:
+    let pollingAddress = `
+<nav style="background-color: crimson; font-size: 30px;color: white; -webkit-text-stroke: 1px black;border-radius: 5px 5px 0px 0px">Nearest Polling Location</nav>
+<p style="border-radius:0px 0px 5px 5px;margin-top: 0px; font-size: 30px; border: 15px rgba(255,255,255,0.7);background: rgba(255,255,255,0.7);background-clip: border-box;">
       ${pollingLocation.line1} ${pollingLocation.city} ${pollingLocation.state} ${pollingLocation.zip}
-      
       </p>`;
     el.innerHTML = pollingAddress;
   }
