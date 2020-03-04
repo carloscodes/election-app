@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+  body {
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+</style>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,33 +42,38 @@
     <title>About</title>
   </head>
   <body>
-    <nav class="navbar navbar-dark bg-primary">
-      <!-- Navbar content -->
-      <h1 style="padding-left: 2%;">
-        InformU.S <i class="fas fa-flag-usa"></i>
-        <div
-          style="font-size: 20px; float: right; list-style-type: none; padding-right: 2%;"
-        >
-          <a id="out" href="index.html">
-            Home
-          </a>
-        </div>
-      </h1>
-    </nav>
-    <div class="container">
-      <h1 style="padding-top: 5%">About</h1>
+  <nav class="navbar navbar-dark bg-primary" style="background-color: crimson;position: fixed;top:0;width: 100%">
+    <!-- Navbar content -->
+    <h1 style="padding-left: 2%; font-family: Georgia, serif;">
+      InformU.S <i class="fas fa-flag-usa"></i>
+      <!--<div
+        style="font-size: 20px; float: right; list-style-type: none;padding-right: 2%;"
+      >
+        <a id="out" href="about.html">
+          About
+        </a>
+      </div>-->
+    </h1>
+  </nav>
+    <div class="container" style="margin-top:5%" >
+      <h1 style="padding-top: 5%; font-size:30px; color: white">About</h1>
       <div class="centerInput">
         <hr />
-        <p>
+        <p style="color: white">
           This app was built in Vanilla JavaScript using the Google Civics API
           for the data and Google Maps API for the reverse geolocating method.
         </p>
-        <p>
+        <p style="color: white">
           For more info, report a bug, or if you would like to contribute,
           contact the
           <a href="https://carloscodes.github.io">author </a>
         </p>
       </div>
     </div>
+  <div style="text-align: center; margin-bottom: 30px;font-size: 20px;color: white; position: center; bottom: 0;text-align: center">
+    <a href="index.html">Home</a>
+    <span > | </span>
+    <a href="mailto: test@email.com?subject = DeadLinkReport&body = Message">Report Dead Link By Email</a>
+  </div>
   </body>
 </html>

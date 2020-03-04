@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html>
+<style>
+  body {
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+</style>
   <head>
     <link rel="stylesheet" href="main.css" />
     <link
@@ -39,9 +47,9 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark bg-primary">
+    <nav class="navbar navbar-dark bg-primary" style="background-color: crimson;position: fixed;top:0;width: 100%">
       <!-- Navbar content -->
-      <h1 style="padding-left: 2%;">
+      <h1 style="padding-left: 2%; font-family: Georgia, serif;">
         InformU.S <i class="fas fa-flag-usa"></i>
         <!--<div
           style="font-size: 20px; float: right; list-style-type: none;padding-right: 2%;"
@@ -52,10 +60,14 @@
         </div>-->
       </h1>
     </nav>
+
+    <div id="aText" style="margin-top:5%">
+      <p style="padding-left: 2%; font-stretch: condensed;font-size:60px;color: whitesmoke ">Election<br>Infromation</p>
+      <p style="padding-left: 2%; font-size:80px;color: yellow">You Need</p>
+    </div>
     <div class="container">
-      <br />
       <div class="centerInput">
-        <p style="font-size: 20px; padding-top: 10%; font-style: italic">
+        <p style="font-size: 25px; font-style: italic; color: whitesmoke; -webkit-text-stroke: 1px black;">
           Click The Green Button To Find Your Location:
         </p>
         <br />
@@ -75,6 +87,7 @@
           class="btn btn-success"
           onclick="getLocation();"
         >
+
           <i class="fas fa-search-location"></i>
         </button>
 
@@ -90,9 +103,15 @@
       </div>
     </div>
 
-    <h5 id="footer">
+    <h5 id="footer" style="font-size: 15px">
       Find your representatives in your area/state. Candidate information and
       propositions will be displayed during election cycles only.
     </h5>
+
+    <div style="text-align: center; margin-bottom: 30px;font-size: 20px;color: white;">
+      <a href="about.html">About</a>
+      <span > | </span>
+      <a href="mailto: test@email.com?subject = DeadLinkReport&body = Message">Report Dead Link By Email</a>
+    </div>
   </body>
 </html>
